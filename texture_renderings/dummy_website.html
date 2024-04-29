@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style>
+  body {
+    padding: 100px;
+    width: 1000px;
+    margin: auto;
+    text-align: left;
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+    color: #121212;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+</style>
+<title>CS 184/284A Rasterizer</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+
+<body>
+
+<h1 align="middle"><font face = "Times New Roman">Texture Renderings</font></h1>
+
+<div align="center">
+    <td>
+        <img src="images/64bb.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (64bluebrown) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/64bb-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> 64bluebrown with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/64bb-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> 64bluebrown with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/64bb-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> 64bluebrown with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/64cracks.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (64cracks) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/64cracks-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> 64cracks with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/64cracks-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> 64cracks with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/64cracks-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> 64cracks with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/520_tor.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (520_tor) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/520_tor-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> 520_torwith 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/520_tor-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> 520_tor with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/520_tor-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> 520_tor with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/acs.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (animalskin_closeup) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/acs-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> animalskin_closeup with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/acs-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> animalskin_closeup with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/acs-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> animalskin_closeup with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/brickwall2.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (brickwall2) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/brickwall2-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> brickwall2 with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/brickwall2-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> brickwall2 with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/brickwall2-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> brickwall3 with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/cabin_firewood.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (cabin_firewood) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/cabin-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> cabin_firewood with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/cabin-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> cabin_firewood with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/cabin-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> cabin_firewood with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/caustic.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (caustic) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/caustic-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> caustic with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/caustic-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> caustic with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/caustic-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> caustic with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/cobblestone.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (cobblestone) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/cobblestone-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> cobblestone with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/cobblestone-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> cobblestone with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/cobblestone-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> cobblestone with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/corral.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (corral) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/corral-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> corral with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/corral-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> corral with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/corral-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> corral with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/dune.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (dune) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/dune-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> dune with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/dune-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> dune with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/dune-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> dune with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/fauxfur.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (fauxfur) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/faux-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> fauxfur with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/faux-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> fauxfur with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/faux-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> fauxfur with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/jagnow.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (jagnow) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/jagnow-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> jagnow with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/jagnow-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> jagnow with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/jagnow-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> jagnow with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/Nmarble23.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (Nmarble23) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/Nmarble23-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> Nmarbl23 with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/Nmarble23-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> Nmarble23 with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/Nmarble23-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> Nmarble23 with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/Nmarble24.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (Nmarble24) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/Nmarble24-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> Nmarbl24 with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/Nmarble24-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> Nmarble24 with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/Nmarble24-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> Nmarble24 with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/prtpca2.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (prtpca2) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/prtpca2-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> prtpca2 with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/prtpca2-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> prtpca2 with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/prtpca2-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> prtpca2 with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/rgc.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (RGran_Cool_1) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/rgc-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (RGran_Cool_1) with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/rgc-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (RGran_Cool_1) with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/rgc-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> (RGran_Cool_1) with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/Rmetal19.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (Rmetal19) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/Rmetal19-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (Rmetal19) with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/Rmetal19-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (Rmetal19) with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/Rmetal19-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> (Rmetal19) with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/tomatoes.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (tomatoes) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/tomatoes-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (tomatoes) with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/tomatoes-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (tomatoes) with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/tomatoes-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> (tomatoes) with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/waves.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (waves) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/waves-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (waves) with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/waves-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (waves) with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/waves-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> (waves) with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/woodwall.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (woodwall) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/woodwall-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (woodwall) with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/woodwall-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (woodwall) with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/woodwall-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> (woodwall) with 3 iterations </figcaption>
+      </td>
+  </div>
+  <br>
+  <div align="center">
+    <td>
+        <img src="images/zebra.png" align="middle" width="225px"/>
+        <figcaption align="middle"> (zebra) Original </figcaption>
+      </td>
+    <table style="width=100%">
+      <tr>
+        <td>
+          <img src="images/zebra-1.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (zebra) with 1 iteration </figcaption>
+        </td>
+        <td>
+          <img src="images/zebra-2.png" align="middle" width="400px"/>
+          <figcaption align="middle"> (zebra) with 2 iterations </figcaption>
+        </td>
+      </tr>
+    </table>
+    <td>
+        <img src="images/zebra-3.png" align="middle" width="400px"/>
+        <figcaption align="middle"> (zebra) with 3 iterations </figcaption>
+      </td>
+  </div>
+
+</body>
+</html>
